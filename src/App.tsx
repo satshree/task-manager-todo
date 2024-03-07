@@ -1,5 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { routes } from "./routes";
+
 function App() {
-  return <>Hello World</>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          {routes.map((route) => (
+            <Route path={route.to} element={route.element} />
+          ))}
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
