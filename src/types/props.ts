@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 
 interface BaseProps {
-  className: string;
-  onClick: () => void;
+  className?: string;
+  onClick?: () => void;
 }
 
 export type BoxProps = BaseProps & {
-  center: string;
+  center: boolean;
   children: ReactNode;
+  padding?: string;
   border?: boolean;
   width?: number;
   height?: number;
