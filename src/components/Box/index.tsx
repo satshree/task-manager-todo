@@ -4,7 +4,7 @@ import style from "./box.module.css";
 
 function Box(props: BoxProps) {
   const flexStyle = {
-    justifyContent: props.center ? "center" : "none",
+    justifyContent: props.center ? "center" : "flex-start",
     padding: props.padding || "1rem",
     border: props.border ? "0.8px solid #c9c9c9" : "none",
     borderRadius: props.border ? "8px" : "none",

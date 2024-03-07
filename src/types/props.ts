@@ -6,8 +6,8 @@ interface BaseProps {
 }
 
 export type BoxProps = BaseProps & {
-  center: boolean;
   children: ReactNode;
+  center?: boolean;
   padding?: string;
   border?: boolean;
   width?: number;
