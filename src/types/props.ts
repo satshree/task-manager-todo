@@ -3,14 +3,23 @@ import { ReactNode } from "react";
 interface BaseProps {
   className?: string;
   onClick?: () => void;
+  style?: object;
 }
 
-export type BoxProps = BaseProps & {
+interface PropsWithChildren {
   children: ReactNode;
-  center?: boolean;
-  padding?: string;
-  border?: boolean;
-  width?: number;
-  height?: number;
-  style?: object;
-};
+}
+
+export type BoxProps = BaseProps &
+  PropsWithChildren & {
+    center?: boolean;
+    padding?: string;
+    border?: boolean;
+    width?: number;
+    height?: number;
+  };
+
+export type TitleProps = BaseProps &
+  PropsWithChildren & {
+    bold?: boolean;
+  };
