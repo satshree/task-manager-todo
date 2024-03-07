@@ -17,9 +17,9 @@ export const routes: Routes[] = [
 ];
 
 export function getRoute(routeName: string) {
-  routes.forEach((route) => {
+  for (let route of routes) {
     if (route.text === routeName) return route.to;
-  });
+  }
 
   return "";
 }
