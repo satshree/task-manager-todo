@@ -10,7 +10,7 @@ function Box(props: BoxProps) {
     borderRadius: props.border ? "8px" : "none",
     width: props.width || "auto",
     height: props.height || "auto",
-    style: props.style ? { ...props.style } : null,
+    ...(props.style || {}),
   };
 
   return (
