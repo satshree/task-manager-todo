@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { To } from "react-router-dom";
 
 interface BaseProps {
   className?: string;
@@ -22,4 +23,9 @@ export type BoxProps = BaseProps &
 export type TitleProps = BaseProps &
   PropsWithChildren & {
     bold?: boolean;
+  };
+
+export type ButtonProps = BaseProps &
+  PropsWithChildren & {
+    variant?: string;
   };
