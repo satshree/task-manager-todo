@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import style from "./edit.module.css";
