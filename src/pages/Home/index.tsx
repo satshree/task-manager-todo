@@ -1,22 +1,37 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Input from "../../components/Input";
 import List from "../../components/Task/List";
 import Button from "../../components/Button";
+
 import { getTasks } from "../../utils/index";
 import { ToDoData } from "../../types";
 
 import style from "./home.module.css";
+import { getRoute } from "../../routes";
 
 function Home() {
+  const TOTAL_TASKS_TO_PULL = 7; // TOTAL NUMBER OF TASKS TO PULL FROM API
+
+  const navigate = useNavigate();
+
   const [inputValue, setInputValue] = useState("");
   const [toDoList, setToDoList] = useState<ToDoData[]>([]);
+
+  const getTaskFromList = (id: number) => {
+    // GET THE TASK FROM LIST
+    for (let t of toDoList) {
+      if (t.id === id) return t;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getTasks();
-        const firstTenTasks = data.slice(0, 7);
-        setToDoList(firstTenTasks);
+        const allTasks = data.slice(0, TOTAL_TASKS_TO_PULL);
+        setToDoList(allTasks);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -43,6 +58,17 @@ function Home() {
     }
   };
 
+  const handleNavigation = (id: number) => {
+    let url = getRoute("edit").replace(":id", id.toString());
+
+    if (id > TOTAL_TASKS_TO_PULL) {
+      // PASS TITLE FROM QUERY PARAMS SINCE ANY TASKS ABOVE 'TOTAL_TASKS_TO_PULL' IS NOT FETCHED OR UPDATED FROM API
+      url += `?title=${getTaskFromList(id)?.title}`;
+    }
+
+    navigate(url);
+  };
+
   return (
     <>
       <div className={style.container}>
@@ -63,7 +89,7 @@ function Home() {
 
       <List
         toDoList={toDoList}
-        edit={(id: number) => alert(`EDIT TODO ID ${id}`)}
+        edit={(id: number) => handleNavigation(id)}
         delete={(id: number) => alert(`DELETE TODO ID ${id}`)}
       />
     </>
