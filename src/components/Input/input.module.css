@@ -1,0 +1,29 @@
+.input-wrapper {
+  /* margin-top: 0.5rem; */
+  margin-bottom: 0.5rem;
+
+  position: relative;
+}
+
+.input-control {
+  display: block;
+
+  border: 0.8px solid #c9c9c9;
+  border-radius: 8px;
+
+  box-sizing: border-box;
+
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.25rem;
+
+  font-size: 16px;
+
+  width: 100%;
+
+  /* transition: outline 0.1s ease-in-out; */
+}
+
+.input-control:focus-visible {
+  outline: #1b5fc4 auto 1px;
+  /* transition: outline 0.2s ease-in-out; */
+}

@@ -37,6 +37,15 @@ export type LinkButtonProps = BasicProps &
     target?: "_blank" | "blank" | undefined;
   };
 
+export type InputProps = BaseProps & {
+  value: string;
+  onChange: (value: string) => void;
+  label?: string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+};
+
 export type ItemProps = BaseProps & {
   todo: ToDoData;
 };

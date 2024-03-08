@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Box from "../../components/Box";
 import Button from "../../components/Button";
 import LinkButton from "../../components/Button/LinkButton";
+import Input from "../../components/Input";
 import Label from "../../components/Label";
 import Link from "../../components/Link";
 import SmallLabel from "../../components/SmallLabel";
@@ -37,6 +39,8 @@ function ComponentList() {
     },
   ];
 
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <div className={style.page}>
       <Box center={true}>Remove this page on final submission</Box>
@@ -70,6 +74,12 @@ function ComponentList() {
         <Label>This is a border box centered</Label>
       </Box>
 
+      <Input
+        // label="Hello"
+        placeholder="This is a input"
+        value={inputValue}
+        onChange={setInputValue}
+      />
       <List toDoList={toDoSample} />
     </div>
   );
