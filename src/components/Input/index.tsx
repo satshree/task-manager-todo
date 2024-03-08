@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { InputChangeHandler, InputProps } from "../../types/props";
 import style from "./input.module.css";
 
