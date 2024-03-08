@@ -3,9 +3,6 @@ import List from "../../components/Task/List";
 import Button from "../../components/Button";
 import { getTasks } from "../../utils/index";
 import { ToDoData } from "../../types";
-import Title from "../../components/Title";
-import Label from "../../components/Label";
-import moment from "moment";
 
 import style from "./home.module.css";
 import Input from "../../components/Input";
@@ -54,16 +51,8 @@ function Home() {
     setToDoList(toDoList.filter((item) => item.id !== id));
   };
 
-  // date format feature with moment.js
-  const today = moment().format("MMMM Do YYYY");
-  const dayOfWeek = moment().format("dddd");
-
   return (
     <div className={style.page}>
-      <div className={style.header}>
-        <Title bold={true}>My Day</Title>
-        <Label>{`${dayOfWeek}, ${today}`}</Label>
-      </div>
       <form className={style.container} onSubmit={handleAddTask}>
         <div>
           <Input
