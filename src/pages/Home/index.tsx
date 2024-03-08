@@ -35,6 +35,7 @@ function Home() {
   };
 
   useEffect(() => {
+    // FETCH DATA FROM API
     const fetchData = async () => {
       try {
         const data = await getTasks();
@@ -49,7 +50,12 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (state && state.newTask && toDoList.length > 0) {
+    // UPDATE TASK DATA NAVIGATING FROM EDIT FORM
+    if (
+      state && // IF STATE IS NOT NULL
+      state.newTask && // IF STATE HAS newTask
+      toDoList.length > 0 // IF THE TASKS HAS ALREADY BEEN LOADED
+    ) {
       const newTask: ToDoData = { ...state.newTask };
       let newTaskList = toDoList;
 
@@ -58,7 +64,9 @@ function Home() {
 
       setToDoList(newTaskList);
     }
-  }, [toDoList]);
+  }, [
+    toDoList, // CHECK FOR newTask FROM EDIT PAGE ONCE THE TASKS HAS BEEN LOADED
+  ]);
 
   const handleAddTask = () => {
     if (inputValue.trim() !== "") {
