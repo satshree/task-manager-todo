@@ -1,5 +1,5 @@
 import { getRoute } from "../../routes";
-import LinkButton from "../../components/Button/LinkButton";
+import Link from "../../components/Link";
 
 function Home() {
   return (
@@ -7,7 +7,7 @@ function Home() {
       Home
       <br />
       <br />
-      <LinkButton to={getRoute("components")}>Go to components</LinkButton>
+      <Link to={getRoute("components")}>Go to components</Link>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import Box from "../../components/Box";
 import Button from "../../components/Button";
 import LinkButton from "../../components/Button/LinkButton";
 import Label from "../../components/Label";
+import Link from "../../components/Link";
 import SmallLabel from "../../components/SmallLabel";
 import Title from "../../components/Title";
 
@@ -22,17 +23,22 @@ function ComponentList() {
         <Button>Button</Button>
         <Button variant="success">Success</Button>
         <Button variant="danger">Danger</Button>
-        <LinkButton to="/">Link to Home</LinkButton>
+        <LinkButton to="/">Link Button to Home</LinkButton>
       </Box>
-      <br />
+      <Box center={true} style={{ flexDirection: "column" }}>
+        <Link to="/">This is a Link (to Home)</Link>
+        <br />
+        <Link to="https://apple.com" target="_blank">
+          This is a Link (to External Page)
+        </Link>
+      </Box>
+
       <Box>
         <Label>This is a just a box</Label>
       </Box>
-      <br />
       <Box border={true}>
         <Label>This is a border box</Label>
       </Box>
-      <br />
       <Box center={true} border={true}>
         <Label>This is a border box centered</Label>
       </Box>
