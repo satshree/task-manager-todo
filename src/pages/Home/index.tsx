@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Input from "../../components/Input";
 import List from "../../components/Task/List";
 import Button from "../../components/Button";
 import { getTasks } from "../../utils/index";
@@ -9,6 +8,8 @@ import Label from "../../components/Label";
 import moment from "moment";
 
 import style from "./home.module.css";
+import Input from "../../components/Input";
+import { FormSubmitHandler } from "../../types/props";
 
 function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -29,7 +30,8 @@ function Home() {
   }, []);
 
   // add functionality
-  const handleAddTask = () => {
+  const handleAddTask: FormSubmitHandler = (e) => {
+    e.preventDefault();
     if (inputValue.trim() !== "") {
       // random id between 1-100
       const userId = Math.floor(Math.random() * 100) + 1;
@@ -62,7 +64,7 @@ function Home() {
         <Title bold={true}>My Day</Title>
         <Label>{`${dayOfWeek}, ${today}`}</Label>
       </div>
-      <div className={style.container}>
+      <form className={style.container} onSubmit={handleAddTask}>
         <div>
           <Input
             className={style.input}
@@ -72,11 +74,9 @@ function Home() {
           />
         </div>
         <div className={style.button}>
-          <Button variant="success" onClick={handleAddTask}>
-            Add
-          </Button>
+          <Button variant="success">Add</Button>
         </div>
-      </div>
+      </form>
 
       <List
         toDoList={toDoList}
