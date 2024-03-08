@@ -11,7 +11,11 @@ function Button(props: ButtonProps) {
       : ""
   }`;
 
-  return <button className={className}>{props.children}</button>;
+  return (
+    <button className={className} onClick={props.onClick} type={props.type}>
+      {props.children}
+    </button>
+  );
 }
 
 export default Button;

@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-
 import { getRoute } from "../../routes";
+import LinkButton from "../../components/Button/LinkButton";
 
 function Home() {
   return (
     <div>
       Home
       <br />
-      <Link to={getRoute("components")}>Go to components</Link>
+      <br />
+      <LinkButton to={getRoute("components")}>Go to components</LinkButton>
     </div>
   );
 }

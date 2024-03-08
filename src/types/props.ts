@@ -11,21 +11,27 @@ interface PropsWithChildren {
   children: ReactNode;
 }
 
-export type BoxProps = BaseProps &
-  PropsWithChildren & {
-    center?: boolean;
-    padding?: string;
-    border?: boolean;
-    width?: number;
-    height?: number;
-  };
+type BasicProps = BaseProps & PropsWithChildren;
 
-export type TitleProps = BaseProps &
-  PropsWithChildren & {
-    bold?: boolean;
-  };
+export type BoxProps = BasicProps & {
+  center?: boolean;
+  padding?: string;
+  border?: boolean;
+  width?: number;
+  height?: number;
+};
 
-export type ButtonProps = BaseProps &
-  PropsWithChildren & {
-    variant?: string;
+export type TitleProps = BasicProps & {
+  bold?: boolean;
+};
+
+export type ButtonProps = BasicProps & {
+  type?: "submit" | "reset" | "reset" | undefined;
+  variant?: string;
+};
+
+export type LinkButtonProps = BasicProps &
+  ButtonProps & {
+    to: To;
+    target?: "_blank" | "blank" | undefined;
   };

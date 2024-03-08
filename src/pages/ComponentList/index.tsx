@@ -1,5 +1,6 @@
 import Box from "../../components/Box";
 import Button from "../../components/Button";
+import LinkButton from "../../components/Button/LinkButton";
 import Label from "../../components/Label";
 import SmallLabel from "../../components/SmallLabel";
 import Title from "../../components/Title";
@@ -21,6 +22,7 @@ function ComponentList() {
         <Button>Button</Button>
         <Button variant="success">Success</Button>
         <Button variant="danger">Danger</Button>
+        <LinkButton to="/">Link to Home</LinkButton>
       </Box>
       <br />
       <Box>
