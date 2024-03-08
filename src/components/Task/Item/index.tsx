@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ItemProps } from "../../../types/props";
 
 import style from "./item.module.css";
