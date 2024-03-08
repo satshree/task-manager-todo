@@ -16,6 +16,7 @@ function App() {
         <div className="page">
           <div className="date-header">
             <Title bold={true}>My Day</Title>
+            <br />
             <Label>{`${dayOfWeek}, ${today}`}</Label>
           </div>
           <Routes>
