@@ -11,6 +11,20 @@ import { ToDoData } from "../../types";
 import style from "./home.module.css";
 import { getRoute } from "../../routes";
 
+function getTaskFromList(id: number, taskList: ToDoData[]) {
+  // GET THE TASK FROM LIST
+  for (let t of taskList) {
+    if (t.id === id) return t;
+  }
+
+  return {
+    userId: 1,
+    id: 0,
+    title: "",
+    completed: false,
+  };
+}
+
 function Home() {
   const TOTAL_TASKS_TO_PULL = 7; // TOTAL NUMBER OF TASKS TO PULL FROM API
 
@@ -20,53 +34,39 @@ function Home() {
   const [inputValue, setInputValue] = useState("");
   const [toDoList, setToDoList] = useState<ToDoData[]>([]);
 
-  const getTaskFromList = (id: number) => {
-    // GET THE TASK FROM LIST
-    for (let t of toDoList) {
-      if (t.id === id) return t;
+  const fetchData = async () => {
+    // FETCH FROM API
+    try {
+      const data = await getTasks();
+      const allTasks = data.slice(0, TOTAL_TASKS_TO_PULL);
+      setToDoList(allTasks);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-
-    return {
-      userId: 1,
-      id: 0,
-      title: "",
-      completed: false,
-    };
   };
 
   useEffect(() => {
-    // FETCH DATA FROM API
-    const fetchData = async () => {
-      try {
-        const data = await getTasks();
-        const allTasks = data.slice(0, TOTAL_TASKS_TO_PULL);
-        setToDoList(allTasks);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    // UPDATE TASK DATA NAVIGATING FROM EDIT FORM
     if (
       state && // IF STATE IS NOT NULL
       state.newTask && // IF STATE HAS newTask
-      toDoList.length > 0 // IF THE TASKS HAS ALREADY BEEN LOADED
+      state.allTasks // IF STATE HAS allTasks
     ) {
+      // RESTORE PREVIOUS STATE
+      let newTaskList = state.allTasks;
+
+      // UPDATE TASK DATA NAVIGATING FROM EDIT FORM
       const newTask: ToDoData = { ...state.newTask };
-      let newTaskList = toDoList;
+      const taskIndex = state.allTasks.indexOf(
+        getTaskFromList(newTask.id, state.allTasks)
+      );
 
-      newTaskList[toDoList.indexOf(getTaskFromList(newTask.id))].title =
-        newTask.title;
-
+      newTaskList[taskIndex].title = newTask.title;
       setToDoList(newTaskList);
+    } else {
+      // FETCH DATA FROM API
+      fetchData();
     }
-  }, [
-    toDoList, // CHECK FOR newTask FROM EDIT PAGE ONCE THE TASKS HAS BEEN LOADED
-  ]);
+  }, []);
 
   const handleAddTask = () => {
     if (inputValue.trim() !== "") {
@@ -88,11 +88,11 @@ function Home() {
 
   const handleNavigation = (id: number) => {
     let url = getRoute("edit").replace(":id", id.toString());
-    let state = { title: "" };
+    let state = { title: "", allTasks: toDoList }; // PASS ALL TASKS TO MAINTAIN STATE
 
     if (id > TOTAL_TASKS_TO_PULL) {
       // PASS TITLE THROUGH STATE SINCE ANY TASKS ABOVE 'TOTAL_TASKS_TO_PULL' IS NOT FETCHED OR UPDATED FROM API
-      state.title = getTaskFromList(id).title;
+      state.title = getTaskFromList(id, toDoList).title;
     }
 
     navigate(url, { state });

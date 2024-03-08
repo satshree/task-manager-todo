@@ -19,12 +19,13 @@ function Edit() {
   const { id } = useParams<string>();
   const [params] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [title, setTitle] = useState(params.get("title") || "");
 
   useEffect(() => {
     if (parseInt(String(id)) > 7) {
-      setTitle(useLocation().state.title);
+      setTitle(location.state.title);
     } else {
       const fetchTask = async () => await getTask(parseInt(String(id)));
 
@@ -42,7 +43,9 @@ function Edit() {
       title,
     };
 
-    navigate(getRoute("home"), { state: { newTask } });
+    navigate(getRoute("home"), {
+      state: { newTask, allTasks: location.state.allTasks || [] },
+    });
   };
 
   return (
