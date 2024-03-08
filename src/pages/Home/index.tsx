@@ -44,20 +44,20 @@ function Home() {
     }
   };
 
-  const today = new Date();
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const formattedDate = today.toLocaleDateString(undefined, options);
+  // const today = new Date();
+  // const options: Intl.DateTimeFormatOptions = {
+  //   weekday: "long",
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  // };
+  // const formattedDate = today.toLocaleDateString(undefined, options);
 
   return (
     <div className={style.page}>
       <div className={style.header}>
         <Title bold={true}>My Day</Title>
-        <Label>{formattedDate}</Label>
+        <Label>Date will be here</Label>
       </div>
       <div className={style.container}>
         <div>
