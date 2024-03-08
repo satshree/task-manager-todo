@@ -1,5 +1,5 @@
 export function getState() {
-  return JSON.parse(localStorage.getItem("state") || "");
+  return JSON.parse(localStorage.getItem("state") || "[]");
 }
 
 export function saveState(state: object) {
