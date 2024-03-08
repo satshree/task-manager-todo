@@ -1,0 +1,52 @@
+.btn {
+  font-size: 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+  background-color: #1b5fc4;
+
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.link-btn {
+  margin: 8px;
+  text-decoration: none;
+}
+
+.btn:visited {
+  color: white;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #376ec2;
+}
+
+.btn-success {
+  /* width: 80px;
+  height: 40px; */
+  background-color: #036e16;
+}
+
+.btn-danger {
+  background-color: #920404;
+}
+
+.btn-success:hover {
+  background-color: #309944 !important;
+}
+
+.btn-danger:hover {
+  background-color: #a23131 !important;
+}
+
+.btn:hover {
+  background-color: #376ec2;
+}
