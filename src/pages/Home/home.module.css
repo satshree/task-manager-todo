@@ -4,7 +4,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 89% 12%;
   margin-bottom: 1.25rem;
 }
 
@@ -14,4 +14,6 @@
 
 .button {
   grid-column: 2;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
