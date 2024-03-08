@@ -8,7 +8,13 @@ import style from "./list.module.css";
 function List(props: ItemListProps) {
   const [toDoList, setToDoList] = useState(props.toDoList);
 
-  useEffect(() => setToDoList(props.toDoList), [props.toDoList]);
+  useEffect(() => {
+    setToDoList(props.toDoList);
+  }, [props.toDoList]);
+
+  const deleteItem = (id: number) => {
+    props.delete(id);
+  };
 
   return (
     <div className={style.list}>
@@ -17,7 +23,7 @@ function List(props: ItemListProps) {
           key={toDo.id}
           todo={toDo}
           edit={props.edit}
-          delete={props.delete}
+          delete={() => deleteItem(toDo.id)}
         />
       ))}
     </div>

@@ -28,6 +28,7 @@ function Home() {
     fetchData();
   }, []);
 
+  // add functionality
   const handleAddTask = () => {
     if (inputValue.trim() !== "") {
       // random id between 1-100
@@ -46,6 +47,12 @@ function Home() {
     }
   };
 
+  // delete functionality
+  const deleteItem = (id: number) => {
+    setToDoList(toDoList.filter((item) => item.id !== id));
+  };
+
+  // date format feature with moment.js
   const today = moment().format("MMMM Do YYYY");
   const dayOfWeek = moment().format("dddd");
 
@@ -74,7 +81,7 @@ function Home() {
       <List
         toDoList={toDoList}
         edit={(id: number) => alert(`EDIT TODO ID ${id}`)}
-        delete={(id: number) => alert(`DELETE TODO ID ${id}`)}
+        delete={deleteItem}
       />
     </div>
   );
