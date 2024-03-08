@@ -13,7 +13,12 @@ function List(props: ItemListProps) {
   return (
     <div className={style.list}>
       {toDoList.map((toDo) => (
-        <Item key={toDo.id} todo={toDo} />
+        <Item
+          key={toDo.id}
+          todo={toDo}
+          edit={props.edit}
+          delete={props.delete}
+        />
       ))}
     </div>
   );
