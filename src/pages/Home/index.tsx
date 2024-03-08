@@ -118,12 +118,6 @@ function Home() {
             <Button onClick={() => window.location.reload()}>Refresh</Button>
           </Box>
         </> // DISPLAY ERROR
-      ) : toDoList.length === 0 ? (
-        <>
-          <Box center={true}>
-            <Label>Hang in there... Fetching data...</Label>
-          </Box>
-        </> // SHOW LOADING
       ) : (
         <>
           <Box center={true}>
