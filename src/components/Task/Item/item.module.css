@@ -1,0 +1,8 @@
+.item {
+  padding: 1rem 1.75rem;
+  border-bottom: 0.8px solid #c9c9c9;
+}
+
+.item:last-child {
+  border-bottom: none;
+}

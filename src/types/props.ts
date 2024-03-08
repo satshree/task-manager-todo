@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { To } from "react-router-dom";
+import { ToDoData } from ".";
 
 interface BaseProps {
   className?: string;
@@ -35,3 +36,11 @@ export type LinkButtonProps = BasicProps &
     to: To;
     target?: "_blank" | "blank" | undefined;
   };
+
+export type ItemProps = BaseProps & {
+  todo: ToDoData;
+};
+
+export type ItemListProps = BaseProps & {
+  toDoList: ToDoData[];
+};
