@@ -12,6 +12,7 @@ import style from "./home.module.css";
 import { FormSubmitHandler } from "../../types/props";
 import { getRoute } from "../../routes";
 import { getState, saveState } from "../../utils/LocalStorage";
+import Box from "../../components/Box";
 
 export function getTaskFromList(id: number, taskList: ToDoData[]) {
   // GET THE TASK FROM LIST
@@ -83,7 +84,8 @@ function Home() {
 
   // delete functionality
   const deleteItem = (id: number) => {
-    setState(toDoList.filter((item) => item.id !== id));
+    if (window.confirm("Are you sure you want to delete this task?"))
+      setState(toDoList.filter((item) => item.id !== id));
   };
 
   const handleNavigation = (id: number) => {
@@ -114,6 +116,18 @@ function Home() {
         edit={(id: number) => handleNavigation(id)}
         delete={deleteItem}
       />
+
+      <Box center={true}>
+        <Button
+          variant="danger"
+          onClick={() => {
+            if (window.confirm("Reset data? All changes will be lost!"))
+              fetchData();
+          }}
+        >
+          Reset
+        </Button>
+      </Box>
     </div>
   );
 }
