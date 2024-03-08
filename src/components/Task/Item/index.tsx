@@ -16,7 +16,7 @@ function Item(props: ItemProps) {
           className={style.check}
           type="checkbox"
           checked={toDo.completed}
-          onClick={() => setToDo({ ...toDo, completed: !toDo.completed })}
+          onChange={() => setToDo({ ...toDo, completed: !toDo.completed })}
         />
         <span
           style={{ textDecoration: toDo.completed ? "line-through" : "none" }}

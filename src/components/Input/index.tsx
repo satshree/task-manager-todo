@@ -21,8 +21,8 @@ function Input(props: InputProps) {
       {props.label && <label className={style.label}>{props.label}</label>}
       <input
         className={`${style["input-control"]} ${props.className}`}
-        value={value}
         onChange={handleChange}
+        value={value || props.value}
         placeholder={props.placeholder || ""}
         required={props.required || false}
         disabled={props.disabled || false}
