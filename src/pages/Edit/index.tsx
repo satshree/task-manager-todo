@@ -30,6 +30,10 @@ function Edit() {
     navigate(getRoute("home"));
   };
 
+  const handleNavigation = () => {
+    if (window.confirm("Discard changes?")) navigate(getRoute("home"));
+  };
+
   return (
     <div className={style["edit-page"]}>
       <Box border={true}>
@@ -42,10 +46,11 @@ function Edit() {
             required={true}
           />
           <br />
-          <Button
-          // variant="success"
-          >
+          <Button type="submit" variant="success">
             Save Changes
+          </Button>
+          <Button type="button" onClick={handleNavigation}>
+            Go Back
           </Button>
         </form>
       </Box>

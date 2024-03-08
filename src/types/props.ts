@@ -27,7 +27,7 @@ export type TitleProps = BasicProps & {
 };
 
 export type ButtonProps = BasicProps & {
-  type?: "submit" | "reset" | "reset" | undefined;
+  type?: "submit" | "reset" | "button" | undefined;
   variant?: string;
 };
 
