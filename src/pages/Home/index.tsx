@@ -4,9 +4,6 @@ import List from "../../components/Task/List";
 import Button from "../../components/Button";
 import { getTasks } from "../../utils/index";
 import { ToDoData } from "../../types";
-import Title from "../../components/Title";
-import Label from "../../components/Label";
-import moment from "moment";
 
 import style from "./home.module.css";
 
@@ -46,15 +43,8 @@ function Home() {
     }
   };
 
-  const today = moment().format("MMMM Do YYYY");
-  const dayOfWeek = moment().format("dddd");
-
   return (
-    <div className={style.page}>
-      <div className={style.header}>
-        <Title bold={true}>My Day</Title>
-        <Label>{`${dayOfWeek}, ${today}`}</Label>
-      </div>
+    <>
       <div className={style.container}>
         <div>
           <Input
@@ -76,7 +66,7 @@ function Home() {
         edit={(id: number) => alert(`EDIT TODO ID ${id}`)}
         delete={(id: number) => alert(`DELETE TODO ID ${id}`)}
       />
-    </div>
+    </>
   );
 }
 
