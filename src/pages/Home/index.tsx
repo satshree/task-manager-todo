@@ -13,6 +13,7 @@ import { FormSubmitHandler } from "../../types/props";
 import { getRoute } from "../../routes";
 import { getState, saveState } from "../../utils/LocalStorage";
 import Box from "../../components/Box";
+import Label from "../../components/Label";
 
 export function getTaskFromList(id: number, taskList: ToDoData[]) {
   // GET THE TASK FROM LIST
@@ -33,6 +34,7 @@ function Home() {
 
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [toDoList, setToDoList] = useState<ToDoData[]>([]);
 
@@ -47,8 +49,9 @@ function Home() {
       const data = await getTasks();
       const allTasks = data.slice(0, TOTAL_TASKS_TO_PULL);
       setState(allTasks);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching data:", error);
+      setError(error.message);
     }
   };
 
@@ -103,42 +106,64 @@ function Home() {
 
   return (
     <div className={style.page}>
-      <form className={style.container} onSubmit={handleAddTask}>
-        <div>
-          <Input
-            className={style.input}
-            placeholder="I want to..."
-            value={inputValue}
-            onChange={setInputValue}
+      {error ? (
+        <>
+          <Box center={true}>
+            <Label>Something went wrong.</Label>
+            <br />
+            <br />
+            {error}
+          </Box>
+          <Box center={true}>
+            <Button onClick={() => window.location.reload()}>Refresh</Button>
+          </Box>
+        </> // DISPLAY ERROR
+      ) : toDoList.length === 0 ? (
+        <>
+          <Box center={true}>
+            <Label>Hang in there... Fetching data...</Label>
+          </Box>
+        </> // SHOW LOADING
+      ) : (
+        <>
+          <form className={style.container} onSubmit={handleAddTask}>
+            <div>
+              <Input
+                className={style.input}
+                placeholder="I want to..."
+                value={inputValue}
+                onChange={setInputValue}
+              />
+            </div>
+            <div className={style.button}>
+              <Button className={style["add-btn"]} variant="success">
+                Add
+              </Button>
+            </div>
+          </form>
+
+          <List
+            toDoList={toDoList}
+            setComplete={(id: number, complete: boolean) =>
+              setComplete(id, complete)
+            }
+            edit={(id: number) => handleNavigation(id)}
+            delete={deleteItem}
           />
-        </div>
-        <div className={style.button}>
-          <Button className={style["add-btn"]} variant="success">
-            Add
-          </Button>
-        </div>
-      </form>
 
-      <List
-        toDoList={toDoList}
-        setComplete={(id: number, complete: boolean) =>
-          setComplete(id, complete)
-        }
-        edit={(id: number) => handleNavigation(id)}
-        delete={deleteItem}
-      />
-
-      <Box center={true}>
-        <Button
-          variant="danger"
-          onClick={() => {
-            if (window.confirm("Reset data? All changes will be lost!"))
-              fetchData();
-          }}
-        >
-          Reset
-        </Button>
-      </Box>
+          <Box center={true}>
+            <Button
+              variant="danger"
+              onClick={() => {
+                if (window.confirm("Reset data? All changes will be lost!"))
+                  fetchData();
+              }}
+            >
+              Reset
+            </Button>
+          </Box>
+        </>
+      )}
     </div>
   );
 }
