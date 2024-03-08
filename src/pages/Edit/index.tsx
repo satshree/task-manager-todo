@@ -1,12 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import {
-  useParams,
-  useSearchParams,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-
-import { getTask } from "../../utils";
+import { useParams, useNavigate } from "react-router-dom";
 
 import style from "./edit.module.css";
 
@@ -14,38 +7,27 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Box from "../../components/Box";
 import { getRoute } from "../../routes";
+import { getState, saveState } from "../../utils/LocalStorage";
+import { getTaskFromList } from "../Home";
 
 function Edit() {
   const { id } = useParams<string>();
-  const [params] = useSearchParams();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const [title, setTitle] = useState(params.get("title") || "");
+  // STATES
+  let allTasks = getState();
+  const task = getTaskFromList(parseInt(String(id)), allTasks);
+  const [title, setTitle] = useState(task.title);
 
-  useEffect(() => {
-    if (parseInt(String(id)) > 7) {
-      setTitle(location.state.title);
-    } else {
-      const fetchTask = async () => await getTask(parseInt(String(id)));
-
-      fetchTask()
-        .then((data) => setTitle(data.title))
-        .catch((error) => console.log(error));
-    }
-  }, []);
+  // useEffect(() => setTitle(task.title), []);
 
   const handleEdit = (e: FormEvent) => {
     e.preventDefault();
 
-    const newTask = {
-      id: parseInt(String(id)),
-      title,
-    };
+    allTasks[allTasks.indexOf(task)].title = title;
+    saveState(allTasks);
 
-    navigate(getRoute("home"), {
-      state: { newTask, allTasks: location.state.allTasks || [] },
-    });
+    navigate(getRoute("home"));
   };
 
   return (
