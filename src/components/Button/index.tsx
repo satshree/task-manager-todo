@@ -3,7 +3,7 @@ import { ButtonProps } from "../../types/props";
 import style from "./button.module.css";
 
 function Button(props: ButtonProps) {
-  const className = `${style.btn} ${
+  const className = `${style.btn} ${props.className} ${
     props.variant === "danger"
       ? style["btn-danger"]
       : props.variant === "success"
