@@ -126,21 +126,23 @@ function Home() {
         </> // SHOW LOADING
       ) : (
         <>
-          <form className={style.container} onSubmit={handleAddTask}>
-            <div>
-              <Input
-                className={style.input}
-                placeholder="I want to..."
-                value={inputValue}
-                onChange={setInputValue}
-              />
-            </div>
-            <div className={style.button}>
-              <Button className={style["add-btn"]} variant="success">
-                Add
-              </Button>
-            </div>
-          </form>
+          <Box center={true}>
+            <form className={style.container} onSubmit={handleAddTask}>
+              <div>
+                <Input
+                  className={style.input}
+                  placeholder="I want to..."
+                  value={inputValue}
+                  onChange={setInputValue}
+                />
+              </div>
+              <div className={style.button}>
+                <Button className={style["add-btn"]} variant="success">
+                  Add
+                </Button>
+              </div>
+            </form>
+          </Box>
 
           <List
             toDoList={toDoList}
