@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Input from "../../components/Input";
 import List from "../../components/Task/List";
@@ -15,6 +15,7 @@ function Home() {
   const TOTAL_TASKS_TO_PULL = 7; // TOTAL NUMBER OF TASKS TO PULL FROM API
 
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [inputValue, setInputValue] = useState("");
   const [toDoList, setToDoList] = useState<ToDoData[]>([]);
@@ -24,6 +25,13 @@ function Home() {
     for (let t of toDoList) {
       if (t.id === id) return t;
     }
+
+    return {
+      userId: 1,
+      id: 0,
+      title: "",
+      completed: false,
+    };
   };
 
   useEffect(() => {
@@ -39,6 +47,18 @@ function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (state && state.newTask && toDoList.length > 0) {
+      const newTask: ToDoData = { ...state.newTask };
+      let newTaskList = toDoList;
+
+      newTaskList[toDoList.indexOf(getTaskFromList(newTask.id))].title =
+        newTask.title;
+
+      setToDoList(newTaskList);
+    }
+  }, [toDoList]);
 
   const handleAddTask = () => {
     if (inputValue.trim() !== "") {
@@ -60,13 +80,14 @@ function Home() {
 
   const handleNavigation = (id: number) => {
     let url = getRoute("edit").replace(":id", id.toString());
+    let state = { title: "" };
 
     if (id > TOTAL_TASKS_TO_PULL) {
-      // PASS TITLE FROM QUERY PARAMS SINCE ANY TASKS ABOVE 'TOTAL_TASKS_TO_PULL' IS NOT FETCHED OR UPDATED FROM API
-      url += `?title=${getTaskFromList(id)?.title}`;
+      // PASS TITLE THROUGH STATE SINCE ANY TASKS ABOVE 'TOTAL_TASKS_TO_PULL' IS NOT FETCHED OR UPDATED FROM API
+      state.title = getTaskFromList(id).title;
     }
 
-    navigate(url);
+    navigate(url, { state });
   };
 
   return (
@@ -81,7 +102,11 @@ function Home() {
           />
         </div>
         <div className={style.button}>
-          <Button variant="success" onClick={handleAddTask}>
+          <Button
+            className={style["add-btn"]}
+            variant="success"
+            onClick={handleAddTask}
+          >
             Add
           </Button>
         </div>

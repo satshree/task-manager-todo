@@ -15,7 +15,7 @@ function Input(props: InputProps) {
       ) : null}
       <input
         className={`${style["input-control"]} ${props.className}`}
-        value={value}
+        value={value || props.value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={props.placeholder || ""}
         required={props.required || false}

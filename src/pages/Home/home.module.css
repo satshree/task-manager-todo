@@ -11,6 +11,7 @@
   display: grid;
   grid-template-columns: 89% 12%;
   margin-bottom: 1.25rem;
+  margin-top: 1rem;
 }
 
 .input {
@@ -19,6 +20,11 @@
 
 .button {
   grid-column: 2;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  /* margin-top: 2rem; */
+  /* margin-bottom: 0.5rem; */
+}
+
+.add-btn {
+  height: 40px;
+  margin-top: 0.5rem;
 }
