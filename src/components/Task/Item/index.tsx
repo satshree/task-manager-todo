@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ItemProps } from "../../../types/props";
 
 import style from "./item.module.css";
+import Button from "../../Button";
 
 function Item(props: ItemProps) {
   const [toDo, setToDo] = useState(props.todo);
@@ -23,7 +24,12 @@ function Item(props: ItemProps) {
           {toDo.title}
         </span>
       </div>
-      <div></div>
+      <div>
+        <Button onClick={() => props.edit(toDo.id)}>Edit</Button>
+        <Button variant="danger" onClick={() => props.delete(toDo.id)}>
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }

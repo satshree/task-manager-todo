@@ -48,8 +48,12 @@ export type InputProps = BaseProps & {
 
 export type ItemProps = BaseProps & {
   todo: ToDoData;
+  edit: (id: number) => void;
+  delete: (id: number) => void;
 };
 
 export type ItemListProps = BaseProps & {
   toDoList: ToDoData[];
+  edit?: (id: number) => void;
+  delete: (id: number) => void;
 };

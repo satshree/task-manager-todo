@@ -80,7 +80,11 @@ function ComponentList() {
         value={inputValue}
         onChange={setInputValue}
       />
-      <List toDoList={toDoSample} />
+      <List
+        toDoList={toDoSample}
+        edit={(id: number) => alert(`EDIT TODO ID ${id}`)}
+        delete={(id: number) => alert(`DELETE TODO ID ${id}`)}
+      />
     </div>
   );
 }
