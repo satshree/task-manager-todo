@@ -57,3 +57,11 @@ export type ItemListProps = BaseProps & {
   edit?: (id: number) => void;
   delete: (id: number) => void;
 };
+
+export type InputChangeHandler = (
+  event: React.ChangeEvent<HTMLInputElement>
+) => void;
+
+export type FormSubmitHandler = (
+  event: React.FormEvent<HTMLFormElement>
+) => void;

@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
-import Input from "../../components/Input";
 import List from "../../components/Task/List";
 import Button from "../../components/Button";
 import { getTasks } from "../../utils/index";
 import { ToDoData } from "../../types";
+import Title from "../../components/Title";
+import Label from "../../components/Label";
+import moment from "moment";
 
 import style from "./home.module.css";
+import Input from "../../components/Input";
+import { FormSubmitHandler } from "../../types/props";
 
 function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -25,7 +29,9 @@ function Home() {
     fetchData();
   }, []);
 
-  const handleAddTask = () => {
+  // add functionality
+  const handleAddTask: FormSubmitHandler = (e) => {
+    e.preventDefault();
     if (inputValue.trim() !== "") {
       // random id between 1-100
       const userId = Math.floor(Math.random() * 100) + 1;
@@ -43,9 +49,22 @@ function Home() {
     }
   };
 
+  // delete functionality
+  const deleteItem = (id: number) => {
+    setToDoList(toDoList.filter((item) => item.id !== id));
+  };
+
+  // date format feature with moment.js
+  const today = moment().format("MMMM Do YYYY");
+  const dayOfWeek = moment().format("dddd");
+
   return (
-    <>
-      <div className={style.container}>
+    <div className={style.page}>
+      <div className={style.header}>
+        <Title bold={true}>My Day</Title>
+        <Label>{`${dayOfWeek}, ${today}`}</Label>
+      </div>
+      <form className={style.container} onSubmit={handleAddTask}>
         <div>
           <Input
             className={style.input}
@@ -55,18 +74,16 @@ function Home() {
           />
         </div>
         <div className={style.button}>
-          <Button variant="success" onClick={handleAddTask}>
-            Add
-          </Button>
+          <Button variant="success">Add</Button>
         </div>
-      </div>
+      </form>
 
       <List
         toDoList={toDoList}
         edit={(id: number) => alert(`EDIT TODO ID ${id}`)}
-        delete={(id: number) => alert(`DELETE TODO ID ${id}`)}
+        delete={deleteItem}
       />
-    </>
+    </div>
   );
 }
 
