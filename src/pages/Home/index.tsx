@@ -3,7 +3,7 @@ import style from "./home.module.css";
 import Input from "../../components/Input";
 import List from "../../components/Task/List";
 import Button from "../../components/Button";
-import getTasks from "../../utils/index";
+import { getTasks } from "../../utils/index";
 import { ToDoData } from "../../types";
 import Title from "../../components/Title";
 import Label from "../../components/Label";
