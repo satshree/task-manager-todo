@@ -1,6 +1,11 @@
 .page {
   padding: 1rem 5rem;
 }
+.header {
+  display: flex;
+  flex-direction: column;
+  column-gap: 2px;
+}
 
 .container {
   display: grid;

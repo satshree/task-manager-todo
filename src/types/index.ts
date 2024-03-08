@@ -10,3 +10,10 @@ export interface ToDoData {
   title: string;
   completed: boolean;
 }
+
+export interface DateInfo {
+  weekday: "long";
+  year: "numeric";
+  month: "long";
+  day: "numeric";
+}

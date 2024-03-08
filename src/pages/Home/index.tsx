@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../components/Title";
+import { useState, useEffect } from "react";
 import style from "./home.module.css";
 import Input from "../../components/Input";
 import List from "../../components/Task/List";
 import Button from "../../components/Button";
 import getTasks from "../../utils/index";
 import { ToDoData } from "../../types";
+import Title from "../../components/Title";
+import Label from "../../components/Label";
 
 function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -43,9 +44,21 @@ function Home() {
     }
   };
 
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = today.toLocaleDateString(undefined, options);
+
   return (
     <div className={style.page}>
-      <Title>Todo App</Title>
+      <div className={style.header}>
+        <Title bold={true}>My Day</Title>
+        <Label>{formattedDate}</Label>
+      </div>
       <div className={style.container}>
         <div>
           <Input
