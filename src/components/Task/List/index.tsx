@@ -22,6 +22,7 @@ function List(props: ItemListProps) {
         <Item
           key={toDo.id}
           todo={toDo}
+          setComplete={props.setComplete}
           edit={props.edit}
           delete={() => deleteItem(toDo.id)}
         />

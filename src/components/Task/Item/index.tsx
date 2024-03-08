@@ -7,8 +7,6 @@ import Button from "../../Button";
 function Item(props: ItemProps) {
   const [toDo, setToDo] = useState(props.todo);
 
-  useEffect(() => setToDo(props.todo), [props.todo]);
-
   return (
     <div className={style.item}>
       <div className={style["check-wrapper"]}>
@@ -16,7 +14,10 @@ function Item(props: ItemProps) {
           className={style.check}
           type="checkbox"
           checked={toDo.completed}
-          onChange={() => setToDo({ ...toDo, completed: !toDo.completed })}
+          onChange={() => {
+            setToDo({ ...toDo, completed: !toDo.completed });
+            props.setComplete(toDo.id, !toDo.completed);
+          }}
         />
         <span
           style={{ textDecoration: toDo.completed ? "line-through" : "none" }}

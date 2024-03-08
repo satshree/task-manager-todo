@@ -88,6 +88,14 @@ function Home() {
       setState(toDoList.filter((item) => item.id !== id));
   };
 
+  const setComplete = (id: number, complete: boolean) => {
+    // SET TASK COMPLETE DATA
+    const index = toDoList.indexOf(getTaskFromList(id, toDoList));
+
+    toDoList[index].completed = complete;
+    setState(toDoList);
+  };
+
   const handleNavigation = (id: number) => {
     let url = getRoute("edit").replace(":id", id.toString());
     navigate(url);
@@ -113,6 +121,9 @@ function Home() {
 
       <List
         toDoList={toDoList}
+        setComplete={(id: number, complete: boolean) =>
+          setComplete(id, complete)
+        }
         edit={(id: number) => handleNavigation(id)}
         delete={deleteItem}
       />
