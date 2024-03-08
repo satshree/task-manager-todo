@@ -112,7 +112,7 @@ function Home() {
         <div>
           <Input
             className={style.input}
-            placeholder="Add Task"
+            placeholder="I want to..."
             value={inputValue}
             onChange={setInputValue}
           />
